@@ -23,17 +23,23 @@ const App = () => {
     setThoughts((prev) => [thought, 
     ...prev]);
   }
+
+  const removeThought = (thoughtIdToRemove) => {
+    setThoughts((thoughts) => thoughts.filter((thought) => thought.id !== thoughtIdToRemove));
+  }
+
   return (
    <div className='App'>
      <header>
        <h1>💭 Passing Thoughts</h1>
      </header>
      <main>
-       <AddThoughtForm />
+       <AddThoughtForm addThought={addThought}/>
        <ul>
          {thoughts.map((thought) => (
            <Thoughts key={thought.id}
-                    thought={thought}/>
+                    thought={thought}
+                    onRemove={removeThought}/>
          ))}
        </ul>
      </main>
